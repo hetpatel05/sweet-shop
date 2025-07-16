@@ -23,6 +23,28 @@ class SweetShop {
     this.sweets.push({ id, name, category, price, quantity });
   }
 
+    deleteSweet(id) {
+    if (id === null || id === undefined) {
+      throw new Error('Sweet ID cannot be null or undefined.');
+    }
+    if (typeof id !== 'number') {
+      throw new Error('Sweet ID must be a number.');
+    }
+    if (id <= 0) {
+      throw new Error('Sweet ID must be a positive number.');
+    }
+
+    const sweetIndex = this.sweets.findIndex(sweet => sweet.id === id);
+
+    if (sweetIndex === -1) {
+      throw new Error(`Sweet with ID ${id} not found.`);
+    }
+
+    const [deletedSweet] = this.sweets.splice(sweetIndex, 1);
+    return deletedSweet;
+  }
+
+
   getSweets() {
     return this.sweets;
   }

@@ -107,8 +107,8 @@ describe('SweetShop - Delete Sweets', () => {
         const initialSweetCount = shop.getSweets().length;
 
         // Act & Assert
-        expect(() => shop.deleteSweet(null)).toThrow('Sweet ID must be a positive number.');
-        expect(() => shop.deleteSweet(undefined)).toThrow('Sweet ID must be a positive number.');
+        expect(() => shop.deleteSweet(null)).toThrow('Sweet ID cannot be null or undefined.');
+        expect(() => shop.deleteSweet(undefined)).toThrow('Sweet ID cannot be null or undefined.');
         expect(shop.getSweets().length).toBe(initialSweetCount);
     });
 });
