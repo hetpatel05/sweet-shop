@@ -44,11 +44,11 @@ class SweetShop {
     return deletedSweet;
   }
 
-    getSweets() {
+  getSweets() {
         return this.sweets.filter(sweet => sweet.quantity > 0);
     }
 
-
+   
   
 }
 
