@@ -135,12 +135,26 @@ class SweetShop {
         return { ...sweet };
     }
 
+    restockSweet(id, quantityToRestock) {
+        // Input validation for ID
+        if (typeof id !== 'number' || id <= 0) {
+            throw new Error('Sweet ID must be a positive number.');
+        }
 
+        // Input validation for quantityToRestock
+        if (typeof quantityToRestock !== 'number' || quantityToRestock <= 0) {
+            throw new Error('Restock quantity must be a positive number.');
+        }
 
-   
+        const sweet = this.sweets.find(s => s.id === id);
 
-   
-  
-}
+        if (!sweet) {
+            throw new Error(`Sweet with ID ${id} not found.`);
+        }
+
+        sweet.quantity += quantityToRestock;
+        return { ...sweet }; // Return a copy of the updated sweet
+    }
+  }
 
 module.exports = SweetShop;
