@@ -16,7 +16,8 @@ Once the dependencies are installed, you can start the application using the `cl
 node cli.js add --id 1 --name "Kaju Katli" --category "Nut-Based" --price 50 --quantity 20
 ```
 
-![CLI in action](./images/Screenshot%202025-07-17%20145128.png)
+
+![CLI in action](./images/Screenshot%202025-07-17%20145806.png)
 
 ## Running Tests
 
@@ -27,8 +28,8 @@ npm test
 ```
 
 This will run all the tests and generate an HTML test report in the project root directory. Here's a screenshot of the test report:
+![Test Report](./images/Screenshot%202025-07-17%20145128.png)
 
-![Test Report](./images/Screenshot%202025-07-17%20145806.png)
 
 ## Features
 
