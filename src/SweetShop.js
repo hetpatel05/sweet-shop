@@ -23,7 +23,7 @@ class SweetShop {
     this.sweets.push({ id, name, category, price, quantity });
   }
 
-    deleteSweet(id) {
+  deleteSweet(id) {
     if (id === null || id === undefined) {
       throw new Error('Sweet ID cannot be null or undefined.');
     }
@@ -43,6 +43,10 @@ class SweetShop {
     const [deletedSweet] = this.sweets.splice(sweetIndex, 1);
     return deletedSweet;
   }
+
+    getSweets() {
+        return this.sweets.filter(sweet => sweet.quantity > 0);
+    }
 
 
   

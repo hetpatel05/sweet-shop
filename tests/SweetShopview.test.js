@@ -91,4 +91,25 @@ describe('SweetShop - View Sweets', () => {
             { id: 1002, name: 'Gulab Jamun', category: 'Milk-Based', price: 10, quantity: 50 }
         ]);
     });
+
+    test('should not return sweets with quantity of 0', () => {
+        // Arrange
+        shop.addSweet(1001, 'Kaju Katli', 'Nut-Based', 50, 20); // In stock
+        shop.addSweet(1002, 'Gulab Jamun', 'Milk-Based', 10, 0);  // Out of stock
+        shop.addSweet(1003, 'Jalebi', 'Fried', 20, 30);      // In stock
+        shop.addSweet(1004, 'Barfi', 'Milk-Based', 40, 0);     // Out of stock
+
+        // Act
+        const availableSweets = shop.getSweets();
+
+        // Assert
+        expect(availableSweets).toHaveLength(2); // Only two sweets should be returned
+        expect(availableSweets).toEqual(expect.arrayContaining([
+            { id: 1001, name: 'Kaju Katli', category: 'Nut-Based', price: 50, quantity: 20 },
+            { id: 1003, name: 'Jalebi', category: 'Fried', price: 20, quantity: 30 }
+        ]));
+        // Ensure the out-of-stock sweets are NOT present
+        expect(availableSweets.some(sweet => sweet.id === 1002)).toBe(false);
+        expect(availableSweets.some(sweet => sweet.id === 1004)).toBe(false);
+    });
 });
