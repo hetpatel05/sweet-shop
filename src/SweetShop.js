@@ -45,9 +45,7 @@ class SweetShop {
   }
 
 
-  getSweets() {
-    return this.sweets;
-  }
+  
 }
 
 module.exports = SweetShop;

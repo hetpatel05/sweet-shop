@@ -87,7 +87,7 @@ describe('SweetShop - Delete Sweets', () => {
     });
 
     test('should not modify the shop if multiple deletion attempts for the same ID occur after first successful deletion', () => {
-        // Arrange
+    
         const sweetToDeleteId = 1001;
         const initialSweetCount = shop.getSweets().length;
 
@@ -103,10 +103,10 @@ describe('SweetShop - Delete Sweets', () => {
     });
 
     test('should throw an error when attempting to delete with a null or undefined ID', () => {
-        // Arrange
+       
         const initialSweetCount = shop.getSweets().length;
 
-        // Act & Assert
+        
         expect(() => shop.deleteSweet(null)).toThrow('Sweet ID cannot be null or undefined.');
         expect(() => shop.deleteSweet(undefined)).toThrow('Sweet ID cannot be null or undefined.');
         expect(shop.getSweets().length).toBe(initialSweetCount);
