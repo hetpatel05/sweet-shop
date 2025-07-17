@@ -48,6 +48,65 @@ class SweetShop {
         return this.sweets.filter(sweet => sweet.quantity > 0);
     }
 
+  searchSweets(criteria) {
+        const { name = null, category = null, minPrice = null, maxPrice = null } = criteria || {};
+        let results = this.getSweets(); // Start with all in-stock sweets
+
+        // Validate and filter by name
+        if (name !== null && name !== undefined) {
+            if (typeof name !== 'string') {
+                throw new Error('Search criteria: Name must be a string.');
+            }
+            if (name !== '') { // Apply filter only if name is not an empty string
+                const lowerCaseName = name.toLowerCase();
+                results = results.filter(sweet =>
+                    sweet.name.toLowerCase().includes(lowerCaseName)
+                );
+            }
+        }
+
+        // Validate and filter by category
+        if (category !== null && category !== undefined) {
+            if (typeof category !== 'string') {
+                throw new Error('Search criteria: Category must be a string.');
+            }
+            if (category !== '') { // Apply filter only if category is not an empty string
+                const lowerCaseCategory = category.toLowerCase();
+                results = results.filter(sweet =>
+                    sweet.category.toLowerCase().includes(lowerCaseCategory)
+                );
+            }
+        }
+
+        // Validate and filter by price range
+        const isMinPriceDefined = minPrice !== null && minPrice !== undefined;
+        const isMaxPriceDefined = maxPrice !== null && maxPrice !== undefined;
+
+        if (isMinPriceDefined || isMaxPriceDefined) {
+            if (isMinPriceDefined && typeof minPrice !== 'number') {
+                throw new Error('Price range values must be numbers.');
+            }
+            if (isMaxPriceDefined && typeof maxPrice !== 'number') {
+                throw new Error('Price range values must be numbers.');
+            }
+
+            // Ensure minPrice is not greater than maxPrice, only if both are defined and valid numbers
+            if (isMinPriceDefined && isMaxPriceDefined && minPrice > maxPrice) {
+                // For a price range, returning an empty array is generally more user-friendly
+                // than throwing an error, as it indicates "no results for this range".
+                return [];
+            }
+
+            results = results.filter(sweet => {
+                const passesMin = isMinPriceDefined ? sweet.price >= minPrice : true;
+                const passesMax = isMaxPriceDefined ? sweet.price <= maxPrice : true;
+                return passesMin && passesMax;
+            });
+        }
+
+        return results;
+    } 
+
    
   
 }
