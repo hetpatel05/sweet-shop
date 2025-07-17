@@ -109,6 +109,32 @@ class SweetShop {
         return results;
     } 
 
+     purchaseSweet(id, quantityToPurchase) {
+        // Input validation for ID
+        if (typeof id !== 'number' || id <= 0) {
+            throw new Error('Sweet ID must be a positive number.');
+        }
+
+        // Input validation for quantityToPurchase
+        if (typeof quantityToPurchase !== 'number' || quantityToPurchase <= 0) {
+            throw new Error('Purchase quantity must be a positive number.');
+        }
+
+        const sweet = this.sweets.find(s => s.id === id);
+
+        if (!sweet) {
+            throw new Error(`Sweet with ID ${id} not found.`);
+        }
+
+        if (sweet.quantity < quantityToPurchase) {
+            throw new Error(`Not enough stock for ${sweet.name}. Available: ${sweet.quantity}, Requested: ${quantityToPurchase}.`);
+        }
+
+        sweet.quantity -= quantityToPurchase;
+        // Return a copy of the updated sweet to prevent direct modification
+        return { ...sweet };
+    }
+
 
    
 
