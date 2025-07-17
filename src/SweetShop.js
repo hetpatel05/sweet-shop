@@ -20,7 +20,9 @@ class SweetShop {
     if (existingSweet) {
       throw new Error('Sweet with this ID already exists.');
     }
-    this.sweets.push({ id, name, category, price, quantity });
+    const newSweet = { id, name, category, price, quantity };
+    this.sweets.push(newSweet);
+    return newSweet;
   }
 
   deleteSweet(id) {
@@ -106,6 +108,9 @@ class SweetShop {
 
         return results;
     } 
+
+
+   
 
    
   
